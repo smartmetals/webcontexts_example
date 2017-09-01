@@ -36,8 +36,8 @@ config :bigapp, BigappWeb.Endpoint,
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/bigapp_web/views/.*(ex)$},
-      ~r{lib/bigapp_web/templates/.*(eex)$}
+      ~r{lib/bigapp_web/.*(ex)$},
+      ~r{lib/bigapp_web/.*(eex)$}
     ]
   ]
 

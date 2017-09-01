@@ -26,10 +26,11 @@ defmodule BigappWeb do
     end
   end
 
-  def view do
+  def view(opts \\
+    [root: "lib/bigapp_web/templates",
+     namespace: BigappWeb]) do
     quote do
-      use Phoenix.View, root: "lib/bigapp_web/templates",
-                        namespace: BigappWeb
+      use Phoenix.View, unquote(opts)
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -58,9 +59,22 @@ defmodule BigappWeb do
     end
   end
 
+  @webdir "bigapp_web"
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
+  defmacro __using__(:view) do
+    view_path =
+      __CALLER__.file
+      |> String.split(@webdir)
+      |> List.last
+      |> Path.dirname
+    templates = "lib/#{@webdir <> view_path}/templates"
+    apply(__MODULE__, :view, [[root: templates,
+                               namespace: __CALLER__.module,
+                               pattern: "**/*"]])
+  end
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
