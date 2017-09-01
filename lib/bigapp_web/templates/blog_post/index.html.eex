@@ -1,0 +1,28 @@
+<h2>Listing Blog posts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for blog_post <- @blog_posts do %>
+    <tr>
+      <td><%= blog_post.title %></td>
+      <td><%= blog_post.content %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: blog_post_path(@conn, :show, blog_post), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: blog_post_path(@conn, :edit, blog_post), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: blog_post_path(@conn, :delete, blog_post), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Blog post", to: blog_post_path(@conn, :new) %></span>

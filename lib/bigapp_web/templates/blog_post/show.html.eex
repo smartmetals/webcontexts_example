@@ -1,0 +1,18 @@
+<h2>Show Blog post</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @blog_post.title %>
+  </li>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @blog_post.content %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: blog_post_path(@conn, :edit, @blog_post) %></span>
+<span><%= link "Back", to: blog_post_path(@conn, :index) %></span>
